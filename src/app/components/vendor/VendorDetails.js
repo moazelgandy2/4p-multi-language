@@ -5,35 +5,38 @@ import { ToastContainer, toast } from "react-toastify";
 import { localApi, localImage } from "../../../../localUrl";
 import Image from "next/image";
 import { getCookie } from "cookies-next";
+import { useTranslations } from "next-intl";
+
 export default function DiscountCard({ data }) {
+  const t = useTranslations("VendorDetails");
   const [isDiscount, setIsDiscount] = useState(false);
   const discounts = data.data.discounts;
   const SuccessMessage = (e) => toast.success(e);
   const ErrorMessage = (e) => toast.error(e);
   const getToken = getCookie("userDetails");
-  
+
   const handelSubmit = async () => {
-   if(getToken){
-    const token = JSON.parse(getToken).token;
-    try {
-      const res = await fetch(`${localApi}/api/discountChecked/7`, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const data = await res.json();
-      if (data.status) {
-        SuccessMessage(data.message);
-      } else {
-        SuccessMessage(data.message);
+    if (getToken) {
+      const token = JSON.parse(getToken).token;
+      try {
+        const res = await fetch(`${localApi}/api/discountChecked/7`, {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const data = await res.json();
+        if (data.status) {
+          SuccessMessage(data.message);
+        } else {
+          SuccessMessage(data.message);
+        }
+      } catch (error) {
+        ErrorMessage(t("please_try_again"));
       }
-    } catch (error) {
-      ErrorMessage("please try again");
+    } else {
+      ErrorMessage(t("purchase_card_first"));
     }
-   }else{
-    ErrorMessage('برجاء شراء البطاقه اولا للحصول علي الخصم');
-   }
   };
 
   return (
@@ -65,20 +68,19 @@ export default function DiscountCard({ data }) {
                   <div className="flex items-center justify-between text-sm text-gray-600 mb-4">
                     <span className="flex items-center gap-1">
                       <FaEye className="w-4 h-4 text-secondary" />{" "}
-                      {item.viwe_count} Client
+                      {item.viwe_count} {t("client")}
                     </span>
                     <span className="flex items-center gap-1">
-                      <FaClock className="w-4 h-4 text-secondary" /> Available
-                      Now
+                      <FaClock className="w-4 h-4 text-secondary" />{" "}
+                      {t("available_now")}
                     </span>
                   </div>
                   <button
                     onClick={handelSubmit}
                     className="p-2 bg-primary text-white rounded-lg w-full hover:bg-primary/90 transition flex items-center justify-center gap-1"
                   >
-                    <FaCopy className="w-4 h-4" /> Claim your discount!
+                    <FaCopy className="w-4 h-4" /> {t("claim_discount")}
                   </button>
-                  
                 </div>
               );
             })

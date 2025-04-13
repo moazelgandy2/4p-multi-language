@@ -174,5 +174,12 @@
     "Valid_One_Year": "صلاحية لمدة عام كامل",
     "Support_24_7": "دعم كامل للمستخدمين على مدار الساعة",
     "Get_Card": "امتلك بطاقتك الآن   "
+  },
+  "VendorDetails": {
+    "client": "عميل",
+    "available_now": "متاح الآن",
+    "claim_discount": "احصل على الخصم",
+    "please_try_again": "يرجى المحاولة مرة أخرى",
+    "purchase_card_first": "يجب عليك شراء البطاقة أولاً"
   }
 }

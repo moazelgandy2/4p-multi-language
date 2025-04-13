@@ -16,6 +16,8 @@ const LanguageSwap = () => {
     const newPath = currentPath.replace(`/${language}`, `/${lang}`);
 
     router.replace(`/${lang}`);
+    router.refresh();
+    router.push(newPath);
   };
 
   return (
@@ -25,7 +27,12 @@ const LanguageSwap = () => {
           className="flex items-center gap-2"
           onClick={() => handelLanguage("ar")}
         >
-          <Image src={EnglishFlag} alt="English" width={25} height={25} />
+          <Image
+            src={EnglishFlag}
+            alt="English"
+            width={25}
+            height={25}
+          />
           <span>EN</span>
         </div>
       ) : (
@@ -33,7 +40,12 @@ const LanguageSwap = () => {
           className="flex items-center gap-2"
           onClick={() => handelLanguage("en")}
         >
-          <Image src={ArabicFlag} alt="Arabic" width={25} height={25} />
+          <Image
+            src={ArabicFlag}
+            alt="Arabic"
+            width={25}
+            height={25}
+          />
           <span>AR</span>
         </div>
       )}

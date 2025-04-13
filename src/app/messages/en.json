@@ -175,5 +175,12 @@
     "Valid_One_Year": "Valid for a full year",
     "Support_24_7": "Full customer support 24/7",
     "Get_Card": "Buy Your Card"
+  },
+  "VendorDetails": {
+    "client": "client",
+    "available_now": "Available now",
+    "claim_discount": "Claim Discount",
+    "please_try_again": "Please try again",
+    "purchase_card_first": "You need to purchase a card first"
   }
 }
