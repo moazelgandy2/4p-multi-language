@@ -1,13 +1,57 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import logo from "/public/image/logo-2.webp";
 import marketopiaLogo from "/public/image/marketopiateam.webp";
 import Image from "next/image";
 import Link from "next/link";
-import { FaFacebookF, FaLinkedinIn, FaWhatsapp } from "react-icons/fa";
+import {
+  FaCommentsDollar,
+  FaFacebookF,
+  FaLinkedinIn,
+  FaWhatsapp,
+  FaInstagram,
+  FaTwitter,
+  FaYoutube,
+  FaSnapchatGhost,
+  FaTiktok,
+  FaTelegram,
+} from "react-icons/fa";
 import { useTranslations } from "next-intl";
+import { localApi } from "../../../../../localUrl";
 
 const Footer = () => {
   const t = useTranslations("Footer");
+  const [configData, setConfigData] = useState(null);
+
+  const fetchConfig = async () => {
+    try {
+      const res = await fetch(`${localApi}/api/config?lang=en`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await res.json();
+      console.log("data=>", data.data);
+
+      setConfigData(data.data);
+      return data;
+    } catch (error) {
+      console.error("Error fetching config:", error);
+    }
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await fetchConfig();
+      if (data) {
+        console.log("Config Data:", data);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <>
@@ -109,28 +153,102 @@ const Footer = () => {
         </aside>
 
         {/* Social Links */}
-        <nav className="md:place-self-center md:justify-self-end">
-          <div className="grid grid-flow-col gap-4">
-            <Link
-              href={"/"}
-              aria-label="Visit facebook Profile"
-            >
-              <FaFacebookF size={25} />
-            </Link>
-            <Link
-              href={"/"}
-              aria-label="Visit whatsapp Profile"
-            >
-              <FaWhatsapp size={25} />
-            </Link>
-            <Link
-              href={"/"}
-              aria-label="Visit linkedin Profile"
-            >
-              <FaLinkedinIn size={25} />
-            </Link>
-          </div>
-        </nav>
+        {configData && configData.config && (
+          <nav className="md:place-self-center md:justify-self-end">
+            <div className="grid grid-flow-col gap-4">
+              {configData.config.facebook_link && (
+                <Link
+                  href={configData.config.facebook_link}
+                  target="_blank"
+                  className="hover:text-blue-500 transition-colors duration-300 text-xl"
+                  aria-label="Facebook"
+                >
+                  <FaFacebookF className="w-5 h-5" />
+                </Link>
+              )}
+              {configData.config.instagram_link && (
+                <Link
+                  href={configData.config.instagram_link}
+                  target="_blank"
+                  className="hover:text-pink-500 transition-colors duration-300 text-xl"
+                  aria-label="Instagram"
+                >
+                  <FaInstagram className="w-5 h-5" />
+                </Link>
+              )}
+              {configData.config.linkedin_link && (
+                <Link
+                  href={configData.config.linkedin_link}
+                  target="_blank"
+                  className="hover:text-blue-700 transition-colors duration-300 text-xl"
+                  aria-label="LinkedIn"
+                >
+                  <FaLinkedinIn className="w-5 h-5" />
+                </Link>
+              )}
+              {configData.config.twitter_link && (
+                <Link
+                  href={configData.config.twitter_link}
+                  target="_blank"
+                  className="hover:text-blue-400 transition-colors duration-300 text-xl"
+                  aria-label="Twitter"
+                >
+                  <FaTwitter className="w-5 h-5" />
+                </Link>
+              )}
+              {configData.config.youtube_link && (
+                <Link
+                  href={configData.config.youtube_link}
+                  target="_blank"
+                  className="hover:text-red-600 transition-colors duration-300 text-xl"
+                  aria-label="YouTube"
+                >
+                  <FaYoutube className="w-5 h-5" />
+                </Link>
+              )}
+              {configData.config.snapchat_link && (
+                <Link
+                  href={configData.config.snapchat_link}
+                  target="_blank"
+                  className="hover:text-yellow-400 transition-colors duration-300 text-xl"
+                  aria-label="Snapchat"
+                >
+                  <FaSnapchatGhost className="w-5 h-5" />
+                </Link>
+              )}
+              {configData.config.tiktok_link && (
+                <Link
+                  href={configData.config.tiktok_link}
+                  target="_blank"
+                  className="hover:text-gray-300 transition-colors duration-300 text-xl"
+                  aria-label="TikTok"
+                >
+                  <FaTiktok className="w-5 h-5" />
+                </Link>
+              )}
+              {configData.config.whatsapp_link && (
+                <Link
+                  href={configData.config.whatsapp_link}
+                  target="_blank"
+                  className="hover:text-green-500 transition-colors duration-300 text-xl"
+                  aria-label="WhatsApp"
+                >
+                  <FaWhatsapp className="w-5 h-5" />
+                </Link>
+              )}
+              {configData.config.telegram_link && (
+                <Link
+                  href={configData.config.telegram_link}
+                  target="_blank"
+                  className="hover:text-blue-500 transition-colors duration-300 text-xl"
+                  aria-label="Telegram"
+                >
+                  <FaTelegram className="w-5 h-5" />
+                </Link>
+              )}
+            </div>
+          </nav>
+        )}
       </footer>
     </>
   );
