@@ -13,7 +13,13 @@ const Footer = () => {
     <>
       <footer className="footer bg-[#1a202c] text-white p-10">
         <aside>
-          <Image src={logo} alt="logo" width={100} height={100} loading="lazy" />
+          <Image
+            src={logo}
+            alt="logo"
+            width={100}
+            height={100}
+            loading="lazy"
+          />
           <p>
             {t("CompanyName")}
             <br />
@@ -24,13 +30,22 @@ const Footer = () => {
         {/* Services Section */}
         <nav>
           <p className="footer-title">{t("Services")}</p>
-          <Link href={"/education/Egyptian?departmentId=1"} className="link-hover">
+          <Link
+            href={"/education/Egyptian?departmentId=1"}
+            className="link-hover"
+          >
             {t("Egyptian_Curricula")}
           </Link>
-          <Link href={"/education/Sudanese?departmentId=2"} className="link-hover">
+          <Link
+            href={"/education/Sudanese?departmentId=2"}
+            className="link-hover"
+          >
             {t("Sudanese_Curricula")}
           </Link>
-          <Link href={"/education/Oxford?departmentId=3"} className="link-hover">
+          <Link
+            href={"/education/Oxford?departmentId=3"}
+            className="link-hover"
+          >
             {t("Oxford_Curricula")}
           </Link>
         </nav>
@@ -38,13 +53,17 @@ const Footer = () => {
         {/* Company Section */}
         <nav>
           <h6 className="footer-title">{t("Company")}</h6>
-          <Link href={"/"} className="link-hover">
+          <Link
+            href={"/"}
+            className="link-hover"
+          >
             {t("Home")}
           </Link>
-          <Link href={"/about"} className="link-hover">
-            {t("About")}
-          </Link>
-          <Link href={"/categories"} className="link-hover">
+
+          <Link
+            href={"/categories"}
+            className="link-hover"
+          >
             {t("Categories")}
           </Link>
         </nav>
@@ -52,10 +71,16 @@ const Footer = () => {
         {/* Legal Section */}
         <nav>
           <h6 className="footer-title">{t("Legal")}</h6>
-          <Link href={"/about"} className="link-hover">
+          <Link
+            href={"/about"}
+            className="link-hover"
+          >
             {t("About_Us")}
           </Link>
-          <Link href={"/news"} className="link-hover">
+          <Link
+            href={"/news"}
+            className="link-hover"
+          >
             {t("News")}
           </Link>
         </nav>
@@ -64,8 +89,17 @@ const Footer = () => {
       {/* Bottom Footer */}
       <footer className="footer bg-[#1a202c] text-white border-white border-t px-10 py-4">
         <aside className="grid-flow-col items-center">
-          <Link href="https://marketopiateam.com" target="_blank">
-            <Image src={marketopiaLogo} alt="marketopiaLogo" loading="lazy" width={70} height={70} />
+          <Link
+            href="https://marketopiateam.com"
+            target="_blank"
+          >
+            <Image
+              src={marketopiaLogo}
+              alt="marketopiaLogo"
+              loading="lazy"
+              width={70}
+              height={70}
+            />
           </Link>
           <p>
             {t("Copyright")}
@@ -77,13 +111,22 @@ const Footer = () => {
         {/* Social Links */}
         <nav className="md:place-self-center md:justify-self-end">
           <div className="grid grid-flow-col gap-4">
-            <Link href={"/"} aria-label="Visit facebook Profile">
+            <Link
+              href={"/"}
+              aria-label="Visit facebook Profile"
+            >
               <FaFacebookF size={25} />
             </Link>
-            <Link href={"/"} aria-label="Visit whatsapp Profile">
+            <Link
+              href={"/"}
+              aria-label="Visit whatsapp Profile"
+            >
               <FaWhatsapp size={25} />
             </Link>
-            <Link href={"/"} aria-label="Visit linkedin Profile">
+            <Link
+              href={"/"}
+              aria-label="Visit linkedin Profile"
+            >
               <FaLinkedinIn size={25} />
             </Link>
           </div>
