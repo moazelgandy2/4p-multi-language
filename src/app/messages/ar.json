@@ -63,7 +63,7 @@
     "Categories": "التصنيفات",
     "Education": "الدورات",
     "News": "الأخبار",
-    "VIP_Discounts" : "بطاقة 4P ",
+    "VIP_Discounts": "بطاقة 4P ",
     "profileText": "الملف الشخصي",
     "editProfile": "تعديل الملف الشخصي",
     "logout": "تسجيل الخروج",
@@ -102,7 +102,7 @@
     "Step3Title": "الوصول إلى المحتوى التعليمي",
     "Step3Desc": "يوفر القسم التعليمي كورسات ودروس مقسمة إلى وحدات متعددة، مع إمكانية المشاهدة بعد تحميل تطبيق الموبايل."
   },
-  "AllCats" : {
+  "AllCats": {
     "findCategories": "اعثر على الفئات",
     "thatSuitYou": "التي تناسبك"
   },
@@ -112,8 +112,8 @@
     "updatingContent": "نحن نقوم بتحديث المحتوى باستمرار. يرجى التحقق مرة أخرى لاحقًا!",
     "backToHome": "الرجوع إلى الصفحة الرئيسية"
   },
-  "Curricula" : {
-    "Curricula" : "المنهج"
+  "Curricula": {
+    "Curricula": "المنهج"
   },
   "login": {
     "validPhoneNumber": "يرجى إدخال رقم هاتف مصري صالح.",
@@ -130,7 +130,7 @@
     "noAccountText": "لا تملك حسابًا؟",
     "registerLinkText": "تسجيل حساب جديد"
   },
- "register" : {
+  "register": {
     "registerTitle": "انشاء حساب جديد",
     "nameLabel": "الاسم الكامل",
     "namePlaceholder": "أدخل اسمك الكامل",
@@ -140,6 +140,8 @@
     "emailPlaceholder": "أدخل بريدك الإلكتروني",
     "passwordLabel": "كلمة المرور",
     "passwordPlaceholder": "أدخل كلمة المرور",
+    "cityLabel": "المدينة",
+    "selectCity": "اختر المدينة",
     "registerButton": "تسجيل",
     "registering": "جاري التسجيل...",
     "alreadyHaveAccount": "هل لديك حساب؟",
@@ -148,21 +150,22 @@
     "validPhoneNumber": "يرجى إدخال رقم هاتف صحيح.",
     "validEmailError": "يرجى إدخال بريد إلكتروني صحيح.",
     "passwordLengthError": "يجب أن تحتوي كلمة المرور على 6 أحرف على الأقل.",
+    "validCityError": " يرجى اختيار المدينة.",
     "tryAgainError": "حدث خطأ. يرجى المحاولة مرة أخرى.",
     "bannerImageAlt": "صورة صفحة التسجيل"
   },
-  "card" : {
-    "Buy_the_card" : "احصل علي الكارت "
+  "card": {
+    "Buy_the_card": "احصل علي الكارت "
   },
-  "new" : {
-    "new_Badge" : "جديد"
+  "new": {
+    "new_Badge": "جديد"
   },
-  "other" : {
-    "Classrooms" : "الفصول الدراسية",
-    "Educational" : "التعليمية",
-    "Units" : "الوحدات"
+  "other": {
+    "Classrooms": "الفصول الدراسية",
+    "Educational": "التعليمية",
+    "Units": "الوحدات"
   },
-  "DiscountCard" : {
+  "DiscountCard": {
     "Card_Image_Alt": "بطاقة الخصومات",
     "Get_Your_Card": "احصل على بطاقة الخصومات المميزة!",
     "Save_Money": "وفر على مشترياتك من المتاجر والمطاعم الشريكة بعروض حصرية.",

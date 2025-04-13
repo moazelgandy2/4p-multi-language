@@ -64,7 +64,7 @@
     "Categories": "Categories",
     "Education": "Education",
     "News": "News",
-    "VIP_Discounts" : " 4P Card ",
+    "VIP_Discounts": " 4P Card ",
     "profileText": "Profile",
     "editProfile": "Edit Profile",
     "logout": "Logout",
@@ -113,8 +113,8 @@
     "updatingContent": "We are constantly updating our content. Please check back later!",
     "backToHome": "Back To Home"
   },
-  "Curricula" : {
-    "Curricula" : "Curricula"
+  "Curricula": {
+    "Curricula": "Curricula"
   },
   "login": {
     "validPhoneNumber": "Please enter a valid Egyptian phone number.",
@@ -131,39 +131,42 @@
     "noAccountText": "Don’t have an account?",
     "registerLinkText": "Register"
   },
-  "register" : {
-      "registerTitle": "Register",
-      "nameLabel": "Full Name",
-      "namePlaceholder": "Enter your full name",
-      "phoneLabel": "Phone Number",
-      "phonePlaceholder": "Enter your phone number",
-      "emailLabel": "Email Address",
-      "emailPlaceholder": "Enter your email",
-      "passwordLabel": "Password",
-      "passwordPlaceholder": "Enter your password",
-      "registerButton": "Register",
-      "registering": "Registering...",
-      "alreadyHaveAccount": "Already have an account?",
-      "loginLink": "Login here",
-      "validNameError": "Please enter your full name.",
-      "validPhoneNumber": "Please enter a valid phone number.",
-      "validEmailError": "Please enter a valid email address.",
-      "passwordLengthError": "Password must be at least 6 characters long.",
-      "tryAgainError": "Something went wrong. Please try again.",
-      "bannerImageAlt": "Registration page banner"    
+  "register": {
+    "registerTitle": "Register",
+    "nameLabel": "Full Name",
+    "namePlaceholder": "Enter your full name",
+    "phoneLabel": "Phone Number",
+    "phonePlaceholder": "Enter your phone number",
+    "emailLabel": "Email Address",
+    "emailPlaceholder": "Enter your email",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "Enter your password",
+    "cityLabel": "City",
+    "selectCity": "Select City",
+    "validCityError": "Please select a city.",
+    "registerButton": "Register",
+    "registering": "Registering...",
+    "alreadyHaveAccount": "Already have an account?",
+    "loginLink": "Login here",
+    "validNameError": "Please enter your full name.",
+    "validPhoneNumber": "Please enter a valid phone number.",
+    "validEmailError": "Please enter a valid email address.",
+    "passwordLengthError": "Password must be at least 6 characters long.",
+    "tryAgainError": "Something went wrong. Please try again.",
+    "bannerImageAlt": "Registration page banner"
   },
-  "card" : {
-    "Buy_the_card" : "Buy the card"
+  "card": {
+    "Buy_the_card": "Buy the card"
   },
-  "new" : {
-    "new_Badge" : "new"
+  "new": {
+    "new_Badge": "new"
   },
-  "other" : {
-    "Classrooms" : "Classrooms",
-    "Educational" : "Educational",
-    "Units" : "Units"
+  "other": {
+    "Classrooms": "Classrooms",
+    "Educational": "Educational",
+    "Units": "Units"
   },
-  "DiscountCard" : {
+  "DiscountCard": {
     "Card_Image_Alt": "Discount Card",
     "Get_Your_Card": "Get Your Exclusive Discount Card!",
     "Save_Money": "Save on your purchases at partner stores and restaurants with exclusive offers.",
@@ -173,5 +176,4 @@
     "Support_24_7": "Full customer support 24/7",
     "Get_Card": "Buy Your Card"
   }
-  
 }

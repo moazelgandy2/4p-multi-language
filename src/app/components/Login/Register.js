@@ -14,8 +14,10 @@ import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl"; // إضافة useTranslations
 
 const Register = () => {
-  const t = useTranslations("register");  // استخدام الترجمة
+  const t = useTranslations("register"); // استخدام الترجمة
   const [name, setName] = useState("");
+  const [cities, setCities] = useState();
+  const [city, setCity] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -27,8 +29,34 @@ const Register = () => {
   const SuccessMessage = (e) => toast.success(e);
   const ErrorMessage = (e) => toast.error(e);
 
+  const fetchCities = async () => {
+    try {
+      console.log("fetchCities");
+      const res = await fetch(`${localApi}/api/config?lang=en`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      console.log("res=>", res);
+      const data = await res.json();
+
+      if (data.status) {
+        setCities(data.data.cities);
+      } else {
+        ErrorMessage(t("fetchCitiesError"));
+      }
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
   useEffect(() => {
     Aos.init();
+  }, []);
+
+  useEffect(() => {
+    fetchCities();
   }, []);
 
   const validateInputs = () => {
@@ -48,6 +76,10 @@ const Register = () => {
       setError(t("passwordLengthError"));
       return false;
     }
+    if (!city) {
+      setError(t("validCityError"));
+      return false;
+    }
     setError("");
     return true;
   };
@@ -61,7 +93,7 @@ const Register = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name, phone, email, password, city_id: 1 }),
+        body: JSON.stringify({ name, phone, email, password, city_id: city }),
       });
 
       const data = await res.json();
@@ -87,6 +119,7 @@ const Register = () => {
   return (
     <div className="font-[sans-serif] relative">
       <ToastContainer />
+
       <div className="h-[240px] font-[sans-serif]">
         <Image
           src={bgCover}
@@ -94,13 +127,18 @@ const Register = () => {
           className="w-full h-full object-cover bg-black"
         />
       </div>
-      <div className="relative -mt-40 m-4" data-aos="zoom-in">
+      <div
+        className="relative -mt-40 m-4"
+        data-aos="zoom-in"
+      >
         <form
           className="bg-white max-w-xl w-full mx-auto shadow-md p-6 sm:p-8 rounded-2xl"
           onSubmit={(e) => e.preventDefault()}
         >
           <div className="mb-12">
-            <h3 className="font-semibold text-3xl text-center">{t("registerTitle")}</h3>
+            <h3 className="font-semibold text-3xl text-center">
+              {t("registerTitle")}
+            </h3>
           </div>
 
           {error && <p className="text-red-500 text-sm text-center">{error}</p>}
@@ -118,12 +156,17 @@ const Register = () => {
                 className="w-full bg-transparent text-sm text-gray-800 border-b border-gray-300 focus:border-primary pl-2 pr-8 py-3 outline-none"
                 placeholder={t("namePlaceholder")}
               />
-              <FaUser size={18} className="text-gray-300" />
+              <FaUser
+                size={18}
+                className="text-gray-300"
+              />
             </div>
           </div>
 
           <div className="mt-8">
-            <label className="text-gray-800 text-xs block mb-2">{t("phoneLabel")}</label>
+            <label className="text-gray-800 text-xs block mb-2">
+              {t("phoneLabel")}
+            </label>
             <div className="relative flex items-center">
               <input
                 name="phone"
@@ -133,12 +176,17 @@ const Register = () => {
                 className="w-full bg-transparent text-sm text-gray-800 border-b border-gray-300 focus:border-primary pl-2 pr-8 py-3 outline-none"
                 placeholder={t("phonePlaceholder")}
               />
-              <FaUser size={18} className="text-gray-300" />
+              <FaUser
+                size={18}
+                className="text-gray-300"
+              />
             </div>
           </div>
 
           <div className="mt-8">
-            <label className="text-gray-800 text-xs block mb-2">{t("emailLabel")}</label>
+            <label className="text-gray-800 text-xs block mb-2">
+              {t("emailLabel")}
+            </label>
             <div className="relative flex items-center">
               <input
                 name="email"
@@ -148,12 +196,17 @@ const Register = () => {
                 className="w-full bg-transparent text-sm text-gray-800 border-b border-gray-300 focus:border-primary pl-2 pr-8 py-3 outline-none"
                 placeholder={t("emailPlaceholder")}
               />
-              <HiMail size={20} className="text-gray-300" />
+              <HiMail
+                size={20}
+                className="text-gray-300"
+              />
             </div>
           </div>
 
           <div className="mt-8">
-            <label className="text-gray-800 text-xs block mb-2">{t("passwordLabel")}</label>
+            <label className="text-gray-800 text-xs block mb-2">
+              {t("passwordLabel")}
+            </label>
             <div className="relative flex items-center">
               <input
                 name="password"
@@ -168,6 +221,31 @@ const Register = () => {
                 className="text-gray-300 cursor-pointer"
                 onClick={() => setHidePassword(!hidePassword)}
               />
+            </div>
+          </div>
+
+          <div className="mt-8">
+            <label className="text-gray-800 text-xs block mb-2">
+              {t("cityLabel") || "City"}
+            </label>
+            <div className="relative flex items-center">
+              <select
+                name="city"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+                className="w-full bg-transparent text-sm text-gray-800 border-b border-gray-300 focus:border-primary pl-2 pr-8 py-3 outline-none"
+              >
+                <option value="">{t("selectCity") || "Select City"}</option>
+                {cities &&
+                  cities.map((cityItem) => (
+                    <option
+                      key={cityItem.id}
+                      value={cityItem.id}
+                    >
+                      {cityItem.name}
+                    </option>
+                  ))}
+              </select>
             </div>
           </div>
 
