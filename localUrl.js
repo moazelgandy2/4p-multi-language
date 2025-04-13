@@ -4,3 +4,7 @@
 export const localApi = "https://admin.4papp.com";
 export const localImage = "https://admin.4papp.com";
 export const baseUrl = "https://admin.4papp.com";
+export const appUrl =
+  "https://play.google.com/store/apps/details?id=com.marketopia.fourP&hl=en_NZ";
+
+export const IOSURL = "https://apps.apple.com/eg/app/4p/id6743159334";

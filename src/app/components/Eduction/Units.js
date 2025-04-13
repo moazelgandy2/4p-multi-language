@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import LoadingCard from "@/app/components/loadingCard/LoadingCard";
 import { BookOpen, Book, ArrowRightCircle } from "lucide-react";
-import { localImage } from "../../../../localUrl";
+import { appUrl, localImage } from "../../../../localUrl";
 import NoImage from "../NoImage";
 import { useTranslations } from "next-intl";
 import { useParams } from "next/navigation";
@@ -15,11 +15,13 @@ const Units = ({ data, loading }) => {
   const { locale } = parm;
   return (
     <div className="container mx-auto my-10">
-      <h1
-        className="text-4xl font-bold text-center text-gray-900 mb-8 flex items-center justify-center gap-3">
-        <BookOpen className="text-primary animate-bounce" size={40} />
+      <h1 className="text-4xl font-bold text-center text-gray-900 mb-8 flex items-center justify-center gap-3">
+        <BookOpen
+          className="text-primary animate-bounce"
+          size={40}
+        />
         <span className="text-gray-900">
-        Educational <span className="text-primary">Units</span>
+          Educational <span className="text-primary">Units</span>
         </span>
       </h1>
 
@@ -55,7 +57,10 @@ const Units = ({ data, loading }) => {
                     href={unit.link || "#"}
                     className="text-xl font-semibold text-gray-800 flex items-center gap-2 hover:text-primary transition"
                   >
-                    <Book className="text-primary" size={20} />
+                    <Book
+                      className="text-primary"
+                      size={20}
+                    />
                     {unit.name}
                   </Link>
                   <p className="text-sm text-gray-600 truncate">
@@ -67,7 +72,10 @@ const Units = ({ data, loading }) => {
               {unit.lessons.length > 0 ? (
                 <div className="space-y-3 mt-4">
                   <h3 className="text-lg font-semibold text-gray-800 flex items-center gap-2">
-                    <BookOpen className="text-primary" size={20} />
+                    <BookOpen
+                      className="text-primary"
+                      size={20}
+                    />
                     Lessons:
                   </h3>
                   <div className="space-y-2">
@@ -78,11 +86,15 @@ const Units = ({ data, loading }) => {
                       >
                         <div className="flex items-center gap-3">
                           <div className="bg-primary text-white p-2 rounded-full">
-                            <BookOpen className="text-white" size={20} />
+                            <BookOpen
+                              className="text-white"
+                              size={20}
+                            />
                           </div>
                           <div>
                             <Link
-                              href={lesson.link || "#"}
+                              target="_blank"
+                              href={appUrl}
                               className="text-md font-semibold text-gray-700 hover:underline flex items-center gap-2"
                             >
                               {lesson.name}
@@ -96,16 +108,21 @@ const Units = ({ data, loading }) => {
                             </p>
                           </div>
                         </div>
-                        <button
-                          className={`px-3 py-1 rounded-md font-semibold transition ${
-                            lesson.link
-                              ? "bg-primary text-white hover:bg-primary/80"
-                              : "bg-gray-400 text-gray-200 cursor-not-allowed"
-                          }`}
-                          disabled={!lesson.link}
+                        <Link
+                          target="_blank"
+                          href={appUrl}
                         >
-                          Start
-                        </button>
+                          <button
+                            className={`px-3 py-1 rounded-md font-semibold transition ${
+                              appUrl
+                                ? "bg-primary text-white hover:bg-primary/80"
+                                : "bg-gray-400 text-gray-200 cursor-not-allowed"
+                            }`}
+                            disabled={!appUrl}
+                          >
+                            Start
+                          </button>
+                        </Link>
                       </div>
                     ))}
                   </div>

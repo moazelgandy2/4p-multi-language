@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import mobileBanner from "/public/image/mobile-banner-2 (1).webp";
 import { useTranslations } from "next-intl";
+import { appUrl, IOSURL } from "../../../../localUrl";
 
 const MobileAdsBanner = () => {
   const t = useTranslations("MobileAdsBanner");
@@ -44,13 +45,15 @@ const MobileAdsBanner = () => {
               {/* Buttons */}
               <div className="flex items-center flex-col gap-7 md:flex-row lg:justify-start justify-center">
                 <Link
-                  href="#"
+                  target="_blank"
+                  href={IOSURL}
                   className="cursor-pointer bg-white text-primary px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-all"
                 >
                   {t("AppStore")}
                 </Link>
                 <Link
-                  href="#"
+                  target="_blank"
+                  href={appUrl}
                   className="cursor-pointer bg-[#1a202c] text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-800 transition-all"
                 >
                   {t("PlayStore")}
