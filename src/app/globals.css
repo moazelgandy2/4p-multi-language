@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*{
+box-sizing: border-box;
+padding: 0;
+margin: 0;
+}
+
+html{
+  scroll-behavior: smooth;
+  overflow-x: hidden !important;
+}
+
+body {
+  color: #262626;
+  font-weight: 500;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #fff !important;
+  overflow-x: hidden !important;
+  font-size: 16px;
+}
+
+input{
+  color: #262626;
+  font: bold;
+}
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+
+  /* Center slide text vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.page-item a{
+  color: #1a202c !important;
+}
+.pagination .active a{
+  background-color: #1a202c !important;
+  border-color: #1a202c !important;
+  color: #fff !important;
+}
+@layer components {
+  .imageHovered {
+    @apply hover:scale-95 transition-all duration-300
+  }
+  .txtHover {
+    @apply hover:text-primary transition-all duration-300
+  }
+}

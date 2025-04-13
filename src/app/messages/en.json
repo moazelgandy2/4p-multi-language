@@ -1,0 +1,177 @@
+{
+  "HomePage": {
+    "Explore": "Explore",
+    "Top_Categories": "Top Categories",
+    "of_Our_Website": "of Our Website",
+    "Find_All_Categories": "Find all categories that suit your needs and interests.",
+    "Discover": "Discover",
+    "Find_the_Best": "Find the Best",
+    "Stores_and_Brands": " Stores & Brands",
+    "Near_You": " Near You"
+  },
+
+  "ContactBanner": {
+    "Exclusive_Offers": "Exclusive Offers with",
+    "Unlock_Best_Deals": "Unlock the Best Deals & Premium Shopping Experience",
+    "High_Quality": "High Quality",
+    "Trusted_Partners": "Trusted Partners",
+    "Free_Gift_Chance": "Free Gift Chance",
+    "Exclusive_Deals": "Exclusive Deals",
+    "Best_Discounts": "Best Discounts"
+  },
+  "AboutSection": {
+    "About_Image": "About Us image",
+    "Unlock_Deals": "Unlock Exclusive Deals & Discounts",
+    "Card_Benefits": "With 4P Card, enjoy unbeatable offers, premium discounts, and special rewards at top brands and stores. Save more and shop smarter!",
+    "Exclusive_Discounts": "Exclusive Discounts",
+    "Top_Brands": "Top Brands & Stores",
+    "Unlimited": "Unlimited",
+    "Special_Offers": "Special Offers",
+    "Get_Card": "Learn More"
+  },
+  "MobileAdsBanner": {
+    "App_Alt": "Download 4P Card App",
+    "Heading": "Unlock Exclusive Deals with 4P Card App!",
+    "Description": "Download the 4P Card app now and explore unbeatable discounts, special offers, and premium store deals—all in one place!",
+    "AppStore": "Download on App Store",
+    "PlayStore": "Download on Play Store"
+  },
+  "NewsCategory": {
+    "Stay_Updated": "Stay Updated with",
+    "Latest_News": "Latest News"
+  },
+  "Footer": {
+    "CompanyName": "4P Marketing Hub.",
+    "CompanySlogan": " Smart marketing, real growth.",
+    "Services": "Services",
+    "Player_Registration": "Player Registration Form",
+    "Egyptian_Curricula": "Egyptian Curricula",
+    "Sudanese_Curricula": "Sudanese Curricula",
+    "Oxford_Curricula": "Oxford Curricula",
+    "Company": "Company",
+    "Home": "Home",
+    "About": "About",
+    "Categories": "Categories",
+    "Legal": "Legal",
+    "About_Us": "About Us",
+    "News": "News",
+    "Copyright": "©Marketopia 2025,",
+    "RightsReserved": "All rights reserved."
+  },
+  "Navbar": {
+    "Home": "Home",
+    "About": "About",
+    "Categories": "Categories",
+    "Education": "Education",
+    "News": "News",
+    "VIP_Discounts" : " 4P Card ",
+    "profileText": "Profile",
+    "editProfile": "Edit Profile",
+    "logout": "Logout",
+    "loginText": "Login"
+  },
+  "WhyChooseUs": {
+    "Title": "Why Choose",
+    "Subtitle": "We provide cutting-edge solutions designed to help you thrive in a competitive market.",
+    "Analytics": "Analytics",
+    "AnalyticsDesc": "Gain deep insights into your business performance with our advanced analytics tools.",
+    "Automation": "Automation",
+    "AutomationDesc": "Save time and boost efficiency by automating repetitive tasks in your workflow.",
+    "Collaboration": "Collaboration",
+    "CollaborationDesc": "Work seamlessly with your team, no matter where they are, using our powerful collaboration tools.",
+    "Innovation": "Innovation",
+    "InnovationDesc": "Stay ahead of the curve with cutting-edge features that drive innovation in your industry.",
+    "Security": "Security",
+    "SecurityDesc": "Protect your data and ensure compliance with our top-notch security measures.",
+    "Growth": "Growth",
+    "GrowthDesc": "Expand your business and reach new heights with our growth-focused solutions.",
+    "OurWebsite": "Our Website?"
+  },
+  "ContactBanner2": {
+    "Title": "Connect with us",
+    "Subtitle": "Contact us with any query or idea. We are here to help!",
+    "Button": "Get In Touch"
+  },
+  "HowItWorks": {
+    "Title": "How Our",
+    "Highlight": "Platform Works",
+    "Subtitle": "Discover how our system provides a complete advertising experience",
+    "Step1Title": "Adding Advertisements",
+    "Step1Desc": "Store owners and sports clubs can easily add their advertisements through our platform, customizing them to attract the right audience.",
+    "Step2Title": "Offers & Registration",
+    "Step2Desc": "Users can benefit from discounts through special discount cards, while athletes can register in sports clubs directly via dedicated forms.",
+    "Step3Title": "Accessing Educational Content",
+    "Step3Desc": "The education section provides courses and lessons divided into multiple units, available for viewing after downloading the mobile app."
+  },
+  "AllCats": {
+    "findCategories": "Find Categories",
+    "thatSuitYou": "That Suit You"
+  },
+  "notfound": {
+    "noResultsFound": "No Results Found!",
+    "noResultsFoundAlt": "No results found illustration",
+    "updatingContent": "We are constantly updating our content. Please check back later!",
+    "backToHome": "Back To Home"
+  },
+  "Curricula" : {
+    "Curricula" : "Curricula"
+  },
+  "login": {
+    "validPhoneNumber": "Please enter a valid Egyptian phone number.",
+    "passwordLengthError": "Password must be at least 6 characters long.",
+    "tryAgainError": "Please try again.",
+    "bannerImageAlt": "Banner Image",
+    "loginTitle": "Login",
+    "phoneLabel": "Phone Number",
+    "phonePlaceholder": "Enter Your Phone Number",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "Enter password",
+    "loggingIn": "Logging in...",
+    "loginButton": "Login",
+    "noAccountText": "Don’t have an account?",
+    "registerLinkText": "Register"
+  },
+  "register" : {
+      "registerTitle": "Register",
+      "nameLabel": "Full Name",
+      "namePlaceholder": "Enter your full name",
+      "phoneLabel": "Phone Number",
+      "phonePlaceholder": "Enter your phone number",
+      "emailLabel": "Email Address",
+      "emailPlaceholder": "Enter your email",
+      "passwordLabel": "Password",
+      "passwordPlaceholder": "Enter your password",
+      "registerButton": "Register",
+      "registering": "Registering...",
+      "alreadyHaveAccount": "Already have an account?",
+      "loginLink": "Login here",
+      "validNameError": "Please enter your full name.",
+      "validPhoneNumber": "Please enter a valid phone number.",
+      "validEmailError": "Please enter a valid email address.",
+      "passwordLengthError": "Password must be at least 6 characters long.",
+      "tryAgainError": "Something went wrong. Please try again.",
+      "bannerImageAlt": "Registration page banner"    
+  },
+  "card" : {
+    "Buy_the_card" : "Buy the card"
+  },
+  "new" : {
+    "new_Badge" : "new"
+  },
+  "other" : {
+    "Classrooms" : "Classrooms",
+    "Educational" : "Educational",
+    "Units" : "Units"
+  },
+  "DiscountCard" : {
+    "Card_Image_Alt": "Discount Card",
+    "Get_Your_Card": "Get Your Exclusive Discount Card!",
+    "Save_Money": "Save on your purchases at partner stores and restaurants with exclusive offers.",
+    "Discounts_Up_To_50": "Discounts up to 50% at participating stores",
+    "Easy_Use": "Easy to use without the need for coupons",
+    "Valid_One_Year": "Valid for a full year",
+    "Support_24_7": "Full customer support 24/7",
+    "Get_Card": "Buy Your Card"
+  }
+  
+}

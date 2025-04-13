@@ -1,0 +1,175 @@
+{
+  "HomePage": {
+    "Explore": " استكشف ",
+    "Top_Categories": "أفضل الفئات",
+    "of_Our_Website": "في موقعنا",
+    "Find_All_Categories": "اكتشف جميع الفئات التي تناسب احتياجاتك واهتماماتك.",
+    "Discover": "اكتشف",
+    "Find_the_Best": "   أفضل ",
+    "Stores_and_Brands": " المتاجر والعلامات التجارية ",
+    "Near_You": "بالقرب منك"
+  },
+  "ContactBanner": {
+    "Exclusive_Offers": "عروض حصرية مع",
+    "Unlock_Best_Deals": "استمتع بأفضل العروض وتجربة تسوق مميزة",
+    "High_Quality": "جودة عالية",
+    "Trusted_Partners": "شركاء موثوقون",
+    "Free_Gift_Chance": "فرصة هدية مجانية",
+    "Exclusive_Deals": "عروض حصرية",
+    "Best_Discounts": "أفضل الخصومات"
+  },
+  "AboutSection": {
+    "About_Image": "صورة عنا",
+    "Unlock_Deals": "احصل على عروض وخصومات حصرية",
+    "Card_Benefits": "مع بطاقة 4P، استمتع بأفضل العروض والخصومات المميزة والمكافآت الخاصة لدى أفضل العلامات التجارية والمتاجر. وفر أكثر وتسوق بذكاء!",
+    "Exclusive_Discounts": "خصومات حصرية",
+    "Top_Brands": "أفضل العلامات التجارية والمتاجر",
+    "Unlimited": "غير محدود",
+    "Special_Offers": "عروض خاصة",
+    "Get_Card": "  المزيد "
+  },
+  "MobileAdsBanner": {
+    "App_Alt": "قم بتنزيل تطبيق 4P Card",
+    "Heading": "احصل على عروض حصرية مع تطبيق 4P Card!",
+    "Description": "قم بتنزيل تطبيق 4P Card الآن واستمتع بأفضل الخصومات والعروض الخاصة والصفقات المميزة من المتاجر — كل ذلك في مكان واحد!",
+    "AppStore": "تحميل من App Store",
+    "PlayStore": "تحميل من Play Store"
+  },
+  "NewsCategory": {
+    "Stay_Updated": "ابقَ على اطلاع على",
+    "Latest_News": "آخر الأخبار"
+  },
+  "Footer": {
+    "CompanyName": "4P Marketing Hub.",
+    "CompanySlogan": "تسويق ذكي، ونمو حقيقي.",
+    "Services": "الخدمات",
+    "Player_Registration": "استمارة تسجيل اللاعبين",
+    "Egyptian_Curricula": "المناهج المصرية",
+    "Sudanese_Curricula": "المناهج السودانية",
+    "Oxford_Curricula": "مناهج أكسفورد",
+    "Company": "الشركة",
+    "Home": "الرئيسية",
+    "About": "من نحن",
+    "Categories": "التصنيفات",
+    "Legal": "القانوني",
+    "About_Us": "معلومات عنا",
+    "News": "الأخبار",
+    "Copyright": "©ماركيتوبيا 2025،",
+    "RightsReserved": "جميع الحقوق محفوظة."
+  },
+  "Navbar": {
+    "Home": "الرئيسية",
+    "About": "من نحن",
+    "Categories": "التصنيفات",
+    "Education": "الدورات",
+    "News": "الأخبار",
+    "VIP_Discounts" : "بطاقة 4P ",
+    "profileText": "الملف الشخصي",
+    "editProfile": "تعديل الملف الشخصي",
+    "logout": "تسجيل الخروج",
+    "loginText": "تسجيل الدخول"
+  },
+  "WhyChooseUs": {
+    "Title": "لماذا تختار",
+    "Subtitle": "نحن نقدم حلولًا متطورة لمساعدتك على النجاح في سوق تنافسي.",
+    "Analytics": "التحليلات",
+    "AnalyticsDesc": "احصل على رؤى عميقة حول أداء عملك باستخدام أدوات التحليل المتقدمة لدينا.",
+    "Automation": "الأتمتة",
+    "AutomationDesc": "وفر الوقت وزد الكفاءة من خلال أتمتة المهام المتكررة في سير عملك.",
+    "Collaboration": "التعاون",
+    "CollaborationDesc": "اعمل بسلاسة مع فريقك، بغض النظر عن مكان وجودهم، باستخدام أدوات التعاون القوية لدينا.",
+    "Innovation": "الابتكار",
+    "InnovationDesc": "ابقَ في المقدمة مع الميزات المتطورة التي تعزز الابتكار في مجالك.",
+    "Security": "الأمان",
+    "SecurityDesc": "حافظ على أمان بياناتك وتأكد من الامتثال باستخدام تدابير الأمان المتقدمة.",
+    "Growth": "النمو",
+    "GrowthDesc": "قم بتوسيع عملك والوصول إلى آفاق جديدة مع حلولنا الموجهة نحو النمو.",
+    "OurWebsite": "موقعنا؟"
+  },
+  "ContactBanner2": {
+    "Title": "تواصل معنا",
+    "Subtitle": "تواصل معنا لأي استفسار أو فكرة. نحن هنا لمساعدتك!",
+    "Button": "اتصل بنا"
+  },
+  "HowItWorks": {
+    "Title": "كيف يعمل",
+    "Highlight": "نظامنا",
+    "Subtitle": "اكتشف كيف يعمل نظامنا لتقديم تجربة إعلانية متكاملة",
+    "Step1Title": "إضافة الإعلانات",
+    "Step1Desc": "يمكن لأصحاب المحلات التجارية والنوادي الرياضية إضافة إعلاناتهم بسهولة من خلال منصتنا، مع إمكانية تخصيصها لجذب الفئة المستهدفة.",
+    "Step2Title": "العروض والتسجيل",
+    "Step2Desc": "يمكن للمستخدمين الاستفادة من العروض والخصومات عبر كروت التخفيض، كما يمكن للاعبين التسجيل في النوادي الرياضية مباشرة من خلال استمارات مخصصة.",
+    "Step3Title": "الوصول إلى المحتوى التعليمي",
+    "Step3Desc": "يوفر القسم التعليمي كورسات ودروس مقسمة إلى وحدات متعددة، مع إمكانية المشاهدة بعد تحميل تطبيق الموبايل."
+  },
+  "AllCats" : {
+    "findCategories": "اعثر على الفئات",
+    "thatSuitYou": "التي تناسبك"
+  },
+  "notfound": {
+    "noResultsFound": "لم يتم العثور على نتائج!",
+    "noResultsFoundAlt": "صورة لا توجد نتائج",
+    "updatingContent": "نحن نقوم بتحديث المحتوى باستمرار. يرجى التحقق مرة أخرى لاحقًا!",
+    "backToHome": "الرجوع إلى الصفحة الرئيسية"
+  },
+  "Curricula" : {
+    "Curricula" : "المنهج"
+  },
+  "login": {
+    "validPhoneNumber": "يرجى إدخال رقم هاتف مصري صالح.",
+    "passwordLengthError": "يجب أن يتكون كلمة المرور من 6 أحرف على الأقل.",
+    "tryAgainError": "يرجى المحاولة مرة أخرى.",
+    "bannerImageAlt": "صورة البانر",
+    "loginTitle": "تسجيل الدخول",
+    "phoneLabel": "رقم الهاتف",
+    "phonePlaceholder": "أدخل رقم هاتفك",
+    "passwordLabel": "كلمة المرور",
+    "passwordPlaceholder": "أدخل كلمة المرور",
+    "loggingIn": "جارٍ تسجيل الدخول...",
+    "loginButton": "تسجيل الدخول",
+    "noAccountText": "لا تملك حسابًا؟",
+    "registerLinkText": "تسجيل حساب جديد"
+  },
+ "register" : {
+    "registerTitle": "انشاء حساب جديد",
+    "nameLabel": "الاسم الكامل",
+    "namePlaceholder": "أدخل اسمك الكامل",
+    "phoneLabel": "رقم الهاتف",
+    "phonePlaceholder": "أدخل رقم هاتفك",
+    "emailLabel": "البريد الإلكتروني",
+    "emailPlaceholder": "أدخل بريدك الإلكتروني",
+    "passwordLabel": "كلمة المرور",
+    "passwordPlaceholder": "أدخل كلمة المرور",
+    "registerButton": "تسجيل",
+    "registering": "جاري التسجيل...",
+    "alreadyHaveAccount": "هل لديك حساب؟",
+    "loginLink": "تسجيل الدخول ",
+    "validNameError": "يرجى إدخال اسمك الكامل.",
+    "validPhoneNumber": "يرجى إدخال رقم هاتف صحيح.",
+    "validEmailError": "يرجى إدخال بريد إلكتروني صحيح.",
+    "passwordLengthError": "يجب أن تحتوي كلمة المرور على 6 أحرف على الأقل.",
+    "tryAgainError": "حدث خطأ. يرجى المحاولة مرة أخرى.",
+    "bannerImageAlt": "صورة صفحة التسجيل"
+  },
+  "card" : {
+    "Buy_the_card" : "احصل علي الكارت "
+  },
+  "new" : {
+    "new_Badge" : "جديد"
+  },
+  "other" : {
+    "Classrooms" : "الفصول الدراسية",
+    "Educational" : "التعليمية",
+    "Units" : "الوحدات"
+  },
+  "DiscountCard" : {
+    "Card_Image_Alt": "بطاقة الخصومات",
+    "Get_Your_Card": "احصل على بطاقة الخصومات المميزة!",
+    "Save_Money": "وفر على مشترياتك من المتاجر والمطاعم الشريكة بعروض حصرية.",
+    "Discounts_Up_To_50": "خصومات تصل إلى 50% في المتاجر المشاركة",
+    "Easy_Use": "استخدام سهل بدون الحاجة إلى كوبونات",
+    "Valid_One_Year": "صلاحية لمدة عام كامل",
+    "Support_24_7": "دعم كامل للمستخدمين على مدار الساعة",
+    "Get_Card": "امتلك بطاقتك الآن   "
+  }
+}
