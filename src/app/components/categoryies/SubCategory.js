@@ -10,7 +10,9 @@ const SubCategory = ({ getParamsName, data }) => {
   return getData.length !== 0 ? (
     <section className="container text-center my-sectionsSpace">
       <h1 className="text-h1">
-        <span className="text-primary">{decodeURIComponent(getParamsName)}</span>
+        <span className="text-primary">
+          {decodeURIComponent(getParamsName)}
+        </span>
       </h1>
       <div className="grid lg:grid-cols-3 gap-10 sm:grid-cols-2 justify-center my-10">
         {getData.map((item, index) => {
@@ -19,8 +21,8 @@ const SubCategory = ({ getParamsName, data }) => {
               className="card  max-w-96 shadow-xl relative"
               key={index}
             >
-              <NewBadge/>
-              <Link href={`/vendor/${item.name}/${item.id}`}>
+              <NewBadge />
+              <Link href={`/vendor/${item.id}`}>
                 <figure>
                   <Image
                     src={`${localImage}/${item.logo}`}
@@ -34,7 +36,7 @@ const SubCategory = ({ getParamsName, data }) => {
               </Link>
               <div className="card-body">
                 <Link
-                  href={`/vendor/${item.name}/${item.id}`}
+                  href={`/vendor/${item.id}`}
                   className="card-title text-xl font-semibold text-gray-700 txtHover"
                 >
                   {item.name}
@@ -55,7 +57,7 @@ const SubCategory = ({ getParamsName, data }) => {
       </div>
     </section>
   ) : (
-    <EmptyPage/>
+    <EmptyPage />
   );
 };
 

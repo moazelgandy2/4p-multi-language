@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useTranslations } from "next-intl";
 import NewBadge from "@/app/components/NewBadge";
 const PopularCategories = ({ data }) => {
-    const t = useTranslations("HomePage");
+  const t = useTranslations("HomePage");
   const getData = data.data.vendors;
   return (
     <section className="container text-center my-sectionsSpace">
@@ -29,8 +29,11 @@ const PopularCategories = ({ data }) => {
               data-aos="fade-up"
               data-aos-offset="10"
             >
-             <NewBadge/>
-              <Link href={`/vendor/${item.name}/${item.id}`} key={item.id}>
+              <NewBadge />
+              <Link
+                href={`/vendor/${item.id}`}
+                key={item.id}
+              >
                 <figure className="pt-10 px-3 rounded-lg">
                   <Image
                     src={`${localImage}/${item.cover}`}
@@ -44,7 +47,7 @@ const PopularCategories = ({ data }) => {
               </Link>
               <div className="card-body">
                 <Link
-                  href={`/vendor/${item.name}/${item.id}`}
+                  href={`/vendor/${item.id}`}
                   className="card-title txtHover line-clamp-1 text-start"
                 >
                   {item.name}

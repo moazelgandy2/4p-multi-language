@@ -45,7 +45,7 @@ const Page = async ({ searchParams }) => {
           >
             <div className="w-full flex justify-center">
               <div className="w-full h-32 rounded-lg overflow-hidden flex items-center justify-center object-contain">
-                <Link href={`/vendor/${vendor.name}/${vendor.id}`}>
+                <Link href={`/vendor/${vendor.id}`}>
                   <Image
                     src={
                       vendor.logo
@@ -62,9 +62,7 @@ const Page = async ({ searchParams }) => {
             </div>
 
             <h3 className="text-lg font-semibold text-center mt-4 text-gray-900  txtHover">
-              <Link href={`/vendor/${vendor.name}/${vendor.id}`}>
-                {vendor.name}
-              </Link>
+              <Link href={`/vendor/${vendor.id}`}>{vendor.name}</Link>
             </h3>
 
             <p className="text-gray-600 text-sm text-center mt-2">

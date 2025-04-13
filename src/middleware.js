@@ -1,7 +1,7 @@
 import createMiddleware from "next-intl/middleware";
 import { routing } from "./i18n/routing";
 import { NextResponse } from "next/server";
-import { cookies } from "next/headers"; 
+import { cookies } from "next/headers";
 
 const intlMiddleware = createMiddleware(routing);
 
@@ -23,9 +23,9 @@ export async function middleware(req) {
 
   const requestedPath = req.nextUrl.pathname;
 
-  const departmentId = req.nextUrl.searchParams.get('departmentId');
+  const departmentId = req.nextUrl.searchParams.get("departmentId");
   if (departmentId) {
-    req.nextUrl.searchParams.set('departmentId', departmentId);
+    req.nextUrl.searchParams.set("departmentId", departmentId);
   }
 
   if (token && protectedPaths.includes(requestedPath)) {
@@ -47,7 +47,7 @@ export const config = {
     "/contact",
     "/login",
     "/register",
-    "/vendor/:name/:id",
+    "/vendor/:id",
     "/categories",
     "/vip-discounts",
     "/categories/:name/:id",
@@ -56,6 +56,6 @@ export const config = {
     "/setting",
     "/education/:name",
     "/education/:name/:name/:id",
-    "/search"
+    "/search",
   ],
 };
