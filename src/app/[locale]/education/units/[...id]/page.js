@@ -12,7 +12,7 @@ const page = async ({ params }) => {
     const res = await fetch(
       `${localApi}/api/units/${param.id[0]}?lang=${param.locale}`,
       {
-        cache: "force-cache",
+        cache: "no-cache",
       }
     );
     if (!res.ok) {
@@ -22,6 +22,9 @@ const page = async ({ params }) => {
     loading = false;
     const getAllData = await res.json();
     data = getAllData.data.units;
+
+    console.log(data);
+
     if (data.length == 0) {
       return <EmptyPage />;
     }
@@ -31,7 +34,10 @@ const page = async ({ params }) => {
   }
   return (
     <>
-      <Units data={data} loading={loading}/>
+      <Units
+        data={data}
+        loading={loading}
+      />
     </>
   );
 };
