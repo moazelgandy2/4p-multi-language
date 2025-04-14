@@ -133,7 +133,10 @@ const Navbar = ({ locale }) => {
               </Link>
               <ul className="hidden lg:flex text-[16px] flex-grow justify-start gap-6 text-white">
                 {menuItems.map((item, index) => (
-                  <li key={index} className="relative">
+                  <li
+                    key={index}
+                    className="relative"
+                  >
                     {item.name === t("Education") ? (
                       <div className="dropdown dropdown-hover">
                         <label
@@ -242,8 +245,14 @@ const Navbar = ({ locale }) => {
                   className="drawer-toggle"
                 />
                 <div className="drawer-content">
-                  <label htmlFor="my-drawer-4" className="drawer-button">
-                    <HiMenuAlt1 size={25} className="text-white" />
+                  <label
+                    htmlFor="my-drawer-4"
+                    className="drawer-button"
+                  >
+                    <HiMenuAlt1
+                      size={25}
+                      className="text-white"
+                    />
                   </label>
                 </div>
                 <div className="drawer-side">
@@ -352,4 +361,4 @@ const Navbar = ({ locale }) => {
   );
 };
 
-export default React.memo(Navbar);
+export default Navbar;
