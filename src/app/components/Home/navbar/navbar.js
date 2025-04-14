@@ -71,7 +71,7 @@ const Navbar = ({ locale }) => {
 
   const handelSubmit = (e) => {
     e.preventDefault();
-    router.push(`/search?${mobileSearch}`);
+    router.push(`/${locale}/search?${mobileSearch}`);
   };
 
   useEffect(() => {
@@ -94,6 +94,12 @@ const Navbar = ({ locale }) => {
 
   const haveCode = userDetails && userDetails.user.code;
 
+  // Helper function to create localized links
+  const localizeLink = (path) => {
+    if (path === "/") return `/${locale}`;
+    return `/${locale}${path}`;
+  };
+
   const menuItems = haveCode
     ? [
         { name: t("Home"), link: "/" },
@@ -110,10 +116,18 @@ const Navbar = ({ locale }) => {
         { name: t("VIP_Discounts"), link: "/vip-discounts" },
         { name: t("News"), link: "/news" },
       ];
+
+  // Check if current path starts with the current locale
+  const isActiveLink = (path) => {
+    if (path === "/" && (pathname === `/${locale}` || pathname === "/"))
+      return true;
+    return pathname.endsWith(path) || pathname === `/${locale}${path}`;
+  };
+
   return (
     <nav
       className={`w-full z-50   ${
-        pathname == "/en" || pathname == "/ar"
+        pathname === `/${locale}` || pathname === "/en" || pathname === "/ar"
           ? `${isSticky ? "md:fixed top-0 bg-[#1a202c]" : "absolute"} `
           : "bg-[#1a202c] relative"
       }`}
@@ -122,7 +136,7 @@ const Navbar = ({ locale }) => {
         <div className="container">
           <div className="navbar text-white">
             <div className="navbar-start flex items-center gap-8 w-full">
-              <Link href="/">
+              <Link href={`/${locale}`}>
                 <Image
                   src={logo}
                   alt="logo"
@@ -153,7 +167,7 @@ const Navbar = ({ locale }) => {
                             <React.Fragment key={ele.id}>
                               <li className="hover:bg-primary hover:text-white rounded-md">
                                 <Link
-                                  href={`/education/${ele.name}?departmentId=${ele.id}`}
+                                  href={`/${locale}/education/${ele.name}?departmentId=${ele.id}`}
                                 >
                                   {ele.name}
                                 </Link>
@@ -164,9 +178,9 @@ const Navbar = ({ locale }) => {
                       </div>
                     ) : (
                       <Link
-                        href={item.link}
+                        href={localizeLink(item.link)}
                         className={`font-medium py-1 transition-all duration-300 ${
-                          pathname === item.link
+                          isActiveLink(item.link)
                             ? "border-b-2 border-primary font-semibold text-primary"
                             : "hover:text-primary"
                         }`}
@@ -201,7 +215,7 @@ const Navbar = ({ locale }) => {
                   <div className="absolute top-full left-0 mt-2 w-64 bg-white text-black rounded-lg shadow-lg overflow-hidden">
                     {searchResult?.map((item) => (
                       <Link
-                        href={`/vendor/${item.name}/${item.id}`}
+                        href={`/${locale}/vendor/${item.name}/${item.id}`}
                         key={item.id}
                         onClick={() => setIsFocused(false)}
                       >
@@ -310,14 +324,14 @@ const Navbar = ({ locale }) => {
                                 setIsEducationOpen(!isEducationOpen)
                               }
                             >
-                              Education
+                              {t("Education")}
                             </button>
                             {isEducationOpen && (
                               <div className="text-gray-300 rounded-md w-full">
                                 {eductionMenu?.map((ele) => (
                                   <Link
                                     key={ele.id}
-                                    href={`/education/${ele.name}?departmentId=${ele.id}`}
+                                    href={`/${locale}/education/${ele.name}?departmentId=${ele.id}`}
                                     className="block py-2 px-4 text-gray-200 hover:text-white hover:bg-primary/20 transition-all duration-300"
                                     onClick={() =>
                                       (document.getElementById(
@@ -333,9 +347,9 @@ const Navbar = ({ locale }) => {
                           </div>
                         ) : (
                           <Link
-                            href={item.link}
+                            href={localizeLink(item.link)}
                             className={`block py-2 px-4 rounded-md transition-all duration-300 my-1 ${
-                              pathname === item.link
+                              isActiveLink(item.link)
                                 ? "text-white font-semibold bg-primary border-l-4 border-primary"
                                 : "text-gray-200 hover:text-white hover:bg-primary/20"
                             }`}
@@ -361,4 +375,4 @@ const Navbar = ({ locale }) => {
   );
 };
 
-export default Navbar;
+export default React.memo(Navbar);
