@@ -17,7 +17,9 @@ const LanguageSwap = () => {
 
     router.replace(`/${lang}`);
     router.refresh();
+
     router.push(newPath);
+    window.location.reload();
   };
 
   return (
