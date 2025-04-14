@@ -117,7 +117,6 @@ const Navbar = ({ locale }) => {
         { name: t("News"), link: "/news" },
       ];
 
-  // Check if current path starts with the current locale
   const isActiveLink = (path) => {
     if (path === "/" && (pathname === `/${locale}` || pathname === "/"))
       return true;
@@ -181,7 +180,7 @@ const Navbar = ({ locale }) => {
                         href={localizeLink(item.link)}
                         className={`font-medium py-1 transition-all duration-300 ${
                           isActiveLink(item.link)
-                            ? "border-b-2 border-primary font-semibold text-primary"
+                            ? " font-semibold text-primary"
                             : "hover:text-primary"
                         }`}
                       >
