@@ -1,18 +1,19 @@
-import createNextIntlPlugin from 'next-intl/plugin';
+import createNextIntlPlugin from "next-intl/plugin";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // experimental: {
-  //   esmExternals: true, 
+  //   esmExternals: true,
   // },
   // compiler : {
   //   removeConsole : true
   // },
+
   webpack(config, { isServer }) {
-    if (process.env.NODE_ENV === 'production') {
+    if (process.env.NODE_ENV === "production") {
       config.optimization.minimize = true;
       config.optimization.splitChunks = {
-        chunks: 'all',
+        chunks: "all",
         maxInitialRequests: Infinity,
         minSize: 0,
       };
@@ -22,13 +23,13 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: '**',
+        protocol: "https",
+        hostname: "**",
       },
       {
-        protocol: 'http',
-        hostname: '192.168.1.43', 
-      }
+        protocol: "http",
+        hostname: "192.168.1.43",
+      },
     ],
   },
 };

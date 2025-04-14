@@ -182,5 +182,35 @@
     "claim_discount": "Claim Discount",
     "please_try_again": "Please try again",
     "purchase_card_first": "You need to purchase a card first"
+  },
+  "CardCode": {
+    "title": "4P Card",
+    "code_label": "Code:",
+    "start_date": "Start Date:",
+    "end_date": "End Date:",
+    "view_details": "View Details"
+  },
+  "UserProfile": {
+    "edit_profile": "Edit Your Profile",
+    "user_profile": "User Profile",
+    "name_label": "Your Name",
+    "name_placeholder": "Your name",
+    "email_label": "Your Email",
+    "email_placeholder": "your.email@mail.com",
+    "phone_label": "Your Phone",
+    "phone_placeholder": "Your phone",
+    "city_label": "City",
+    "city_placeholder": "Your city",
+    "change_password": "Change Password",
+    "new_password_placeholder": "Enter Your New Password",
+    "confirm_password": "Confirm Password",
+    "confirm_password_placeholder": "Confirm Your New Password",
+    "save_button": "Save",
+    "loading_user_data": "Loading user data...",
+    "no_user_found": "No user found",
+    "password_length_error": "Password must be at least 6 characters long.",
+    "password_mismatch": "Passwords do not match.",
+    "try_again": "Please Try Again",
+    "payment_failed": "Payment failed. Please try again later."
   }
 }

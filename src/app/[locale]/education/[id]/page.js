@@ -15,9 +15,10 @@ const page = async ({ params, searchParams }) => {
     const res = await fetch(
       `${localApi}/api/providers/${departmentId}?lang=${param.local}`,
       {
-        cache: "force-cache",
+        cache: "no-cache",
       }
     );
+
     if (!res.ok) {
       loading = false;
       return notFound();
@@ -25,6 +26,9 @@ const page = async ({ params, searchParams }) => {
     loading = false;
     const getAllData = await res.json();
     data = getAllData.data.providers;
+
+    console.log("data=>", data);
+
     if (data.length == 0) {
       return <EmptyPage />;
     }
@@ -33,7 +37,12 @@ const page = async ({ params, searchParams }) => {
     return notFound();
   }
   return (
-   <EductionProviders loading={loading} data={data} param={param} departmentId={departmentId}/>
+    <EductionProviders
+      loading={loading}
+      data={data}
+      param={param}
+      departmentId={departmentId}
+    />
   );
 };
 

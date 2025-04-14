@@ -6,7 +6,9 @@ import Image from "next/image";
 import { localApi, localImage } from "../../../../localUrl";
 import { ToastContainer, toast } from "react-toastify";
 import CardCode from "@/app/components/profile-setting/CardCode";
+import SettingsSkeleton from "@/app/components/profile-setting/SettingsSkeleton";
 import { useParams, useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 const Page = () => {
   const [user, setUser] = useState(null);
@@ -17,9 +19,11 @@ const Page = () => {
   const ErrorMessage = (e) => toast.error(e);
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
-  const params = useSearchParams()
-  const getStatus = params.get('status')
-  const getMessage = params.get('message')
+  const params = useSearchParams();
+  const getStatus = params.get("status");
+  const getMessage = params.get("message");
+  const { locale } = useParams();
+  const t = useTranslations("UserProfile");
 
   useEffect(() => {
     const getDataFromCookies = getCookie("userDetails");
@@ -40,18 +44,18 @@ const Page = () => {
         const status = data.status;
         if (status) {
           setUser(data.data);
-          if(getStatus == 'success' && getMessage == 'Approved'){
+          if (getStatus == "success" && getMessage == "Approved") {
             const getDataFromCookies = getCookie("userDetails");
             const getCookieData = JSON.parse(getDataFromCookies);
             const updatedUserDetails = {
               ...getCookieData,
               user: {
                 ...getCookieData.user,
-                code: data.data.code, 
+                code: data.data.code,
               },
             };
-           setCookie("userDetails", updatedUserDetails); 
-           console.log(getDataFromCookies)
+            setCookie("userDetails", updatedUserDetails);
+            console.log(getDataFromCookies);
           }
         } else {
           ErrorMessage(data.message);
@@ -65,11 +69,15 @@ const Page = () => {
     getData();
   }, [getMessage, getStatus]);
 
-  useEffect(()=>{
-    if(getStatus == 'pending' || getStatus == 'failed'){
-      ErrorMessage('فشلت عمليه الدفع برجاء المحاوله في وقت لاحق')
+  useEffect(() => {
+    if (getStatus == "pending" || getStatus == "failed") {
+      ErrorMessage(
+        t("payment_failed", {
+          fallback: "فشلت عمليه الدفع برجاء المحاوله في وقت لاحق",
+        })
+      );
     }
-  },[getStatus])
+  }, [getStatus, t]);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -84,10 +92,16 @@ const Page = () => {
 
   const validateInputs = () => {
     if (password.length < 6) {
-      ErrorMessage("Password must be at least 6 characters long.");
+      ErrorMessage(
+        t("password_length_error", {
+          fallback: "Password must be at least 6 characters long.",
+        })
+      );
       return false;
     } else if (password !== passwordConfirmation) {
-      ErrorMessage("Password is not the same.");
+      ErrorMessage(
+        t("password_mismatch", { fallback: "Password is not the same." })
+      );
       return false;
     }
     return true;
@@ -138,16 +152,16 @@ const Page = () => {
           ...getCookieData,
           user: {
             ...getCookieData.user,
-            image: data.data.image, 
+            image: data.data.image,
           },
         };
-       setCookie("userDetails", updatedUserDetails);
-       window.location.reload()
+        setCookie("userDetails", updatedUserDetails);
+        window.location.reload();
       } else {
         ErrorMessage(data.message);
       }
     } catch (error) {
-      ErrorMessage("Please Try Again");
+      ErrorMessage(t("try_again", { fallback: "Please Try Again" }));
     } finally {
       setLoading(false);
     }
@@ -158,15 +172,13 @@ const Page = () => {
       <ToastContainer />
       {/* Main Content */}
       {loading ? (
-        <p className="text-center text-lg text-gray-500 h-[90vh]">
-          Loading user data...
-        </p>
+        <SettingsSkeleton t={t} />
       ) : user ? (
         <main className="w-full min-h-screen py-1 flex justify-center">
           <div className="p-1 md:p-6 w-full">
             <div className="w-full  pb-10 mt-8  sm:rounded-lg">
               <h2 className="pl-6 text-3xl font-bold sm:text-2xl text-[#1a202c]">
-                Edit Your Profile
+                {t("edit_profile", { fallback: "Edit Your Profile" })}
               </h2>
 
               <div className="grid mx-auto mt-8">
@@ -176,7 +188,10 @@ const Page = () => {
                     <label htmlFor="changePhoto">
                       <Image
                         className="object-cover w-48 h-48 p-1 rounded-full ring-2 ring-[#BB3826]"
-                        alt={user.name || "User Profile"}
+                        alt={
+                          user.name ||
+                          t("user_profile", { fallback: "User Profile" })
+                        }
                         src={
                           previewImage
                             ? previewImage
@@ -206,7 +221,7 @@ const Page = () => {
                 <div className="items-center mt-10 sm:mt-16">
                   <div className="mb-6">
                     <label className="block mb-2 text-lg font-medium text-[#1a202c]">
-                      Your Name
+                      {t("name_label", { fallback: "Your Name" })}
                     </label>
                     <input
                       type="text"
@@ -215,13 +230,15 @@ const Page = () => {
                         setUser({ ...user, name: e.target.value })
                       }
                       className="bg-white border border-gray-300 text-[#262626] text-lg rounded-lg focus:ring-[#BB3826] focus:border-[#BB3826] block w-full p-3"
-                      placeholder="Your name"
+                      placeholder={t("name_placeholder", {
+                        fallback: "Your name",
+                      })}
                     />
                   </div>
 
                   <div className="mb-6">
                     <label className="block mb-2 text-lg font-medium text-[#1a202c]">
-                      Your Email
+                      {t("email_label", { fallback: "Your Email" })}
                     </label>
                     <input
                       type="email"
@@ -230,13 +247,15 @@ const Page = () => {
                         setUser({ ...user, email: e.target.value })
                       }
                       className="bg-white border border-gray-300 text-[#262626] text-lg rounded-lg focus:ring-[#BB3826] focus:border-[#BB3826] block w-full p-3"
-                      placeholder="your.email@mail.com"
+                      placeholder={t("email_placeholder", {
+                        fallback: "your.email@mail.com",
+                      })}
                     />
                   </div>
 
                   <div className="mb-6">
                     <label className="block mb-2 text-lg font-medium text-[#1a202c]">
-                      Your Phone
+                      {t("phone_label", { fallback: "Your Phone" })}
                     </label>
                     <input
                       type="text"
@@ -245,13 +264,15 @@ const Page = () => {
                         setUser({ ...user, phone: e.target.value })
                       }
                       className="bg-white border border-gray-300 text-[#262626] text-lg rounded-lg focus:ring-[#BB3826] focus:border-[#BB3826] block w-full p-3"
-                      placeholder="Your phone"
+                      placeholder={t("phone_placeholder", {
+                        fallback: "Your phone",
+                      })}
                     />
                   </div>
 
                   <div className="mb-8">
                     <label className="block mb-2 text-lg font-medium text-[#1a202c]">
-                      City
+                      {t("city_label", { fallback: "City" })}
                     </label>
                     <input
                       type="text"
@@ -260,33 +281,39 @@ const Page = () => {
                         setUser({ ...user, city: e.target.value })
                       }
                       className="bg-white border border-gray-300 text-[#262626] text-lg rounded-lg focus:ring-[#BB3826] focus:border-[#BB3826] block w-full p-3"
-                      placeholder="Your city"
+                      placeholder={t("city_placeholder", {
+                        fallback: "Your city",
+                      })}
                     />
                   </div>
 
                   <div className="mb-6">
                     <label className="block mb-2 text-lg font-medium text-[#1a202c]">
-                      Change Password
+                      {t("change_password", { fallback: "Change Password" })}
                     </label>
                     <input
                       type="password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       className="bg-white border border-gray-300 text-[#262626] text-lg rounded-lg focus:ring-[#BB3826] focus:border-[#BB3826] block w-full p-3"
-                      placeholder="Enter Your New Password"
+                      placeholder={t("new_password_placeholder", {
+                        fallback: "Enter Your New Password",
+                      })}
                     />
                   </div>
 
                   <div className="mb-6">
                     <label className="block mb-2 text-lg font-medium text-[#1a202c]">
-                      Confirm Password
+                      {t("confirm_password", { fallback: "Confirm Password" })}
                     </label>
                     <input
                       type="password"
                       value={passwordConfirmation}
                       onChange={(e) => setPasswordConfirmation(e.target.value)}
                       className="bg-white border border-gray-300 text-[#262626] text-lg rounded-lg focus:ring-[#BB3826] focus:border-[#BB3826] block w-full p-3"
-                      placeholder="Confirm Your New Password"
+                      placeholder={t("confirm_password_placeholder", {
+                        fallback: "Confirm Your New Password",
+                      })}
                     />
                   </div>
                   {/* Save Button */}
@@ -295,7 +322,7 @@ const Page = () => {
                       onClick={handleSave}
                       className="text-white bg-[#BB3826] hover:bg-[#962E1E] focus:ring-4 focus:outline-none focus:ring-[#BB3826] font-medium rounded-lg text-lg px-6 py-3"
                     >
-                      Save
+                      {t("save_button", { fallback: "Save" })}
                     </button>
                   </div>
                 </div>
@@ -305,7 +332,7 @@ const Page = () => {
         </main>
       ) : (
         <p className="text-center text-lg text-gray-500 h-[90vh]">
-          No user found
+          {t("no_user_found", { fallback: "No user found" })}
         </p>
       )}
     </div>
