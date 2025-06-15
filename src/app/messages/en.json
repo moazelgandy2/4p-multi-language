@@ -128,8 +128,23 @@
     "passwordPlaceholder": "Enter password",
     "loggingIn": "Logging in...",
     "loginButton": "Login",
-    "noAccountText": "Don’t have an account?",
-    "registerLinkText": "Register"
+    "noAccountText": "Don't have an account?",
+    "registerLinkText": "Register",
+    "forgotPassword": "Forgot Password?",
+    "resetPasswordTitle": "Reset Password",
+    "sendOtpButton": "Send OTP",
+    "sendingOtp": "Sending...",
+    "enterPhoneNumber": "Please enter your phone number to receive a verification code.",
+    "otpLabel": "Verification Code",
+    "otpPlaceholder": "Enter the code",
+    "verifyButton": "Verify",
+    "verifying": "Verifying...",
+    "newPasswordLabel": "New Password",
+    "confirmPasswordLabel": "Confirm New Password",
+    "resetPasswordButton": "Reset Password",
+    "resettingPassword": "Resetting...",
+    "backToLogin": "Back to Login",
+    "passwordResetSuccess": "Password reset successfully! You can now log in with your new password."
   },
   "register": {
     "registerTitle": "Register",
@@ -153,7 +168,16 @@
     "validEmailError": "Please enter a valid email address.",
     "passwordLengthError": "Password must be at least 6 characters long.",
     "tryAgainError": "Something went wrong. Please try again.",
-    "bannerImageAlt": "Registration page banner"
+    "bannerImageAlt": "Registration page banner",
+    "otpTitle": "Verify Your Account",
+    "otpDescription": "An OTP has been sent to your email. Please enter it below to verify your account.",
+    "otpLabel": "OTP Code",
+    "otpPlaceholder": "Enter OTP",
+    "verifyButton": "Verify",
+    "verifying": "Verifying...",
+    "resendButton": "Resend OTP",
+    "resending": "Resending...",
+    "invalidOtpError": "Invalid OTP. Please try again."
   },
   "card": {
     "Buy_the_card": "Buy the card"
@@ -211,6 +235,7 @@
     "password_length_error": "Password must be at least 6 characters long.",
     "password_mismatch": "Passwords do not match.",
     "try_again": "Please Try Again",
-    "payment_failed": "Payment failed. Please try again later."
+    "payment_failed": "Payment failed. Please try again later.",
+    "otp_required": "OTP is required."
   }
 }

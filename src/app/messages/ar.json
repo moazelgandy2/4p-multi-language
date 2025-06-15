@@ -128,7 +128,22 @@
     "loggingIn": "جارٍ تسجيل الدخول...",
     "loginButton": "تسجيل الدخول",
     "noAccountText": "لا تملك حسابًا؟",
-    "registerLinkText": "تسجيل حساب جديد"
+    "registerLinkText": "تسجيل حساب جديد",
+    "forgotPassword": "هل نسيت كلمة المرور؟",
+    "resetPasswordTitle": "إعادة تعيين كلمة المرور",
+    "sendOtpButton": "إرسال الرمز",
+    "sendingOtp": "جاري الإرسال...",
+    "enterPhoneNumber": "يرجى إدخال رقم هاتفك لاستلام رمز التحقق.",
+    "otpLabel": "رمز التحقق",
+    "otpPlaceholder": "أدخل الرمز",
+    "verifyButton": "تحقق",
+    "verifying": "جاري التحقق...",
+    "newPasswordLabel": "كلمة المرور الجديدة",
+    "confirmPasswordLabel": "تأكيد كلمة المرور الجديدة",
+    "resetPasswordButton": "إعادة تعيين كلمة المرور",
+    "resettingPassword": "جاري الإعادة...",
+    "backToLogin": "العودة إلى تسجيل الدخول",
+    "passwordResetSuccess": "تمت إعادة تعيين كلمة المرور بنجاح! يمكنك الآن تسجيل الدخول بكلمة مرورك الجديدة."
   },
   "register": {
     "registerTitle": "انشاء حساب جديد",
@@ -152,7 +167,15 @@
     "passwordLengthError": "يجب أن تحتوي كلمة المرور على 6 أحرف على الأقل.",
     "validCityError": " يرجى اختيار المدينة.",
     "tryAgainError": "حدث خطأ. يرجى المحاولة مرة أخرى.",
-    "bannerImageAlt": "صورة صفحة التسجيل"
+    "bannerImageAlt": "صورة صفحة التسجيل",
+    "otpTitle": "تحقق من حسابك",
+    "otpDescription": "تم إرسال رمز التحقق إلى بريدك الإلكتروني. يرجى إدخاله أدناه للتحقق من حسابك.",
+    "otpPlaceholder": "أدخل رمز التحقق",
+    "verifyButton": "تحقق",
+    "verifying": "يتم التحقق...",
+    "resendButton": "إعادة إرسال الرمز",
+    "resending": "جاري الإرسال...",
+    "invalidOtpError": "رمز التحقق غير صالح. يرجى المحاولة مرة أخرى."
   },
   "card": {
     "Buy_the_card": "احصل علي الكارت "
@@ -210,6 +233,7 @@
     "password_length_error": "يجب أن تتكون كلمة المرور من 6 أحرف على الأقل.",
     "password_mismatch": "كلمات المرور غير متطابقة.",
     "try_again": "يرجى المحاولة مرة أخرى",
-    "payment_failed": "فشلت عملية الدفع. يرجى المحاولة في وقت لاحق."
+    "payment_failed": "فشلت عملية الدفع. يرجى المحاولة في وقت لاحق.",
+    "otp_required": "رمز التحقق مطلوب."
   }
 }

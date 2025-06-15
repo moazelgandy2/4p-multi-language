@@ -14,11 +14,18 @@ const Page = () => {
   const [user, setUser] = useState(null);
   const [previewImage, setPreviewImage] = useState(null);
   const [uploadImage, setUploadImage] = useState(null);
-  const [loading, setLoading] = useState(true); // Set initial loading to true
+  const [loading, setLoading] = useState(true);
   const SuccessMessage = (e) => toast.success(e);
   const ErrorMessage = (e) => toast.error(e);
+
+  const [passwordStep, setPasswordStep] = useState("idle"); // idle, verify-otp, reset-password
+  const [otp, setOtp] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
+  const [otpLoading, setOtpLoading] = useState(false);
+  const [verifyLoading, setVerifyLoading] = useState(false);
+  const [resendTimer, setResendTimer] = useState(0);
+
   const params = useSearchParams();
   const getStatus = params.get("status");
   const getMessage = params.get("message");
@@ -27,6 +34,10 @@ const Page = () => {
 
   useEffect(() => {
     const getDataFromCookies = getCookie("userDetails");
+    if (!getDataFromCookies) {
+      setLoading(false);
+      return;
+    }
     const token = JSON.parse(getDataFromCookies).token;
     const getData = async () => {
       try {
@@ -45,17 +56,12 @@ const Page = () => {
         if (status) {
           setUser(data.data);
           if (getStatus == "success" && getMessage == "Approved") {
-            const getDataFromCookies = getCookie("userDetails");
             const getCookieData = JSON.parse(getDataFromCookies);
             const updatedUserDetails = {
               ...getCookieData,
-              user: {
-                ...getCookieData.user,
-                code: data.data.code,
-              },
+              user: { ...getCookieData.user, ...data.data },
             };
-            setCookie("userDetails", updatedUserDetails);
-            console.log(getDataFromCookies);
+            setCookie("userDetails", JSON.stringify(updatedUserDetails));
           }
         } else {
           ErrorMessage(data.message);
@@ -70,12 +76,18 @@ const Page = () => {
   }, [getMessage, getStatus]);
 
   useEffect(() => {
+    let interval;
+    if (resendTimer > 0) {
+      interval = setInterval(() => {
+        setResendTimer((prevTimer) => prevTimer - 1);
+      }, 1000);
+    }
+    return () => clearInterval(interval);
+  }, [resendTimer]);
+
+  useEffect(() => {
     if (getStatus == "pending" || getStatus == "failed") {
-      ErrorMessage(
-        t("payment_failed", {
-          fallback: "فشلت عمليه الدفع برجاء المحاوله في وقت لاحق",
-        })
-      );
+      ErrorMessage(t("payment_failed"));
     }
   }, [getStatus, t]);
 
@@ -84,114 +96,233 @@ const Page = () => {
     if (file) {
       const formData = new FormData();
       formData.append("image", file);
-      const imageUrl = URL.createObjectURL(file);
-      setPreviewImage(imageUrl);
+      setPreviewImage(URL.createObjectURL(file));
       setUploadImage(formData);
     }
   };
 
-  const validateInputs = () => {
+  const handleSendOtp = async () => {
+    setOtpLoading(true);
+    try {
+      const res = await fetch(`${localApi}/api/auth/send-code`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ phone: user.phone, type: "reset" }),
+      });
+      const data = await res.json();
+      if (data.status) {
+        SuccessMessage("OTP sent successfully.");
+        setPasswordStep("verify-otp");
+        setResendTimer(60);
+      } else {
+        ErrorMessage(data.message || "Failed to send OTP.");
+      }
+    } catch (error) {
+      ErrorMessage("An error occurred while sending OTP.");
+    } finally {
+      setOtpLoading(false);
+    }
+  };
+
+  const handleVerifyOtp = async () => {
+    if (!otp.trim()) {
+      ErrorMessage(t("otp_required"));
+      return;
+    }
+    setVerifyLoading(true);
+    const token = JSON.parse(getCookie("userDetails")).token;
+    const formData = new FormData();
+    formData.append("phone", user.phone);
+    formData.append("code", otp);
+    try {
+      const res = await fetch(`${localApi}/api/auth/verify-otp`, {
+        method: "POST",
+        headers: { Authorization: `Bearer ${token}` },
+        body: formData,
+      });
+      const data = await res.json();
+      if (data.status) {
+        SuccessMessage("OTP verified successfully.");
+        setPasswordStep("reset-password");
+      } else {
+        ErrorMessage(data.message || "Invalid OTP.");
+      }
+    } catch (error) {
+      ErrorMessage("An error occurred during OTP verification.");
+    } finally {
+      setVerifyLoading(false);
+    }
+  };
+
+  const validatePassword = () => {
     if (password.length < 6) {
-      ErrorMessage(
-        t("password_length_error", {
-          fallback: "Password must be at least 6 characters long.",
-        })
-      );
+      ErrorMessage(t("password_length_error"));
       return false;
-    } else if (password !== passwordConfirmation) {
-      ErrorMessage(
-        t("password_mismatch", { fallback: "Password is not the same." })
-      );
+    }
+    if (password !== passwordConfirmation) {
+      ErrorMessage(t("password_mismatch"));
       return false;
     }
     return true;
   };
 
   const handleSave = async () => {
-    if (password.length !== 0) {
-      if (!validateInputs()) return;
-    }
-    const getDataFromCookies = getCookie("userDetails");
-    const token = JSON.parse(getDataFromCookies).token;
-
     setLoading(true);
+    const token = JSON.parse(getCookie("userDetails")).token;
+
     const formData = new FormData();
     formData.append("name", user?.name || "");
     formData.append("email", user?.email || "");
     formData.append("phone", user?.phone || "");
-    formData.append("city_id", 1);
-
-    if (password) {
-      formData.append("password", password);
-      formData.append("password_confirmation", passwordConfirmation);
-    }
+    formData.append("city_id", user?.city_id || 1);
 
     if (uploadImage) {
       formData.append("image", uploadImage.get("image"));
     }
 
-    try {
-      const res = await fetch(`${localApi}/api/auth/profile/update`, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        body: formData,
-      });
-
-      if (!res.ok) {
-        throw new Error("Update failed, please try again.");
+    if (passwordStep === "reset-password") {
+      if (!validatePassword()) {
+        setLoading(false);
+        return;
       }
+      formData.append("password", password);
+      formData.append("password_confirmation", passwordConfirmation);
+    }
+
+    try {
+      const res = await fetch(
+        `${localApi}/api/auth/profile/update?lang=${locale}`,
+        {
+          method: "POST",
+          headers: { Authorization: `Bearer ${token}` },
+          body: formData,
+        }
+      );
 
       const data = await res.json();
-
       if (data.status) {
-        SuccessMessage(data.message);
-        const getCookieData = JSON.parse(getDataFromCookies);
+        SuccessMessage(data.message || "Profile updated successfully!");
+        const getCookieData = JSON.parse(getCookie("userDetails"));
         const updatedUserDetails = {
           ...getCookieData,
-          user: {
-            ...getCookieData.user,
-            image: data.data.image,
-          },
+          user: { ...getCookieData.user, ...data.data },
         };
-        setCookie("userDetails", updatedUserDetails);
+        setCookie("userDetails", JSON.stringify(updatedUserDetails));
         window.location.reload();
       } else {
-        ErrorMessage(data.message);
+        ErrorMessage(data.message || "Update failed.");
       }
     } catch (error) {
-      ErrorMessage(t("try_again", { fallback: "Please Try Again" }));
+      ErrorMessage(t("try_again"));
     } finally {
       setLoading(false);
     }
   };
 
+  const renderPasswordSection = () => {
+    switch (passwordStep) {
+      case "verify-otp":
+        return (
+          <>
+            <div className="mb-6">
+              <label className="block mb-2 text-lg font-medium text-[#1a202c]">
+                OTP Code
+              </label>
+              <input
+                type="text"
+                value={otp}
+                onChange={(e) => setOtp(e.target.value)}
+                className="bg-white border border-gray-300 text-[#262626] text-lg rounded-lg focus:ring-[#BB3826] focus:border-[#BB3826] block w-full p-3"
+                placeholder="Enter OTP from your phone"
+              />
+            </div>
+            <div className="mb-6 flex flex-col items-center gap-4">
+              <button
+                onClick={handleVerifyOtp}
+                disabled={verifyLoading}
+                className="w-full text-white bg-primary hover:bg-primary/90 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-lg px-5 py-3 text-center"
+              >
+                {verifyLoading ? "Verifying..." : "Verify OTP"}
+              </button>
+              <button
+                onClick={handleSendOtp}
+                disabled={otpLoading || resendTimer > 0}
+                className="text-sm text-primary hover:underline disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                {otpLoading
+                  ? "Resending..."
+                  : resendTimer > 0
+                  ? `Resend in ${resendTimer}s`
+                  : "Resend OTP"}
+              </button>
+            </div>
+          </>
+        );
+      case "reset-password":
+        return (
+          <>
+            <div className="mb-6">
+              <label className="block mb-2 text-lg font-medium text-[#1a202c]">
+                {t("new_password_placeholder")}
+              </label>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="bg-white border border-gray-300 text-[#262626] text-lg rounded-lg focus:ring-[#BB3826] focus:border-[#BB3826] block w-full p-3"
+                placeholder={t("new_password_placeholder")}
+              />
+            </div>
+            <div className="mb-6">
+              <label className="block mb-2 text-lg font-medium text-[#1a202c]">
+                {t("confirm_password")}
+              </label>
+              <input
+                type="password"
+                value={passwordConfirmation}
+                onChange={(e) => setPasswordConfirmation(e.target.value)}
+                className="bg-white border border-gray-300 text-[#262626] text-lg rounded-lg focus:ring-[#BB3826] focus:border-[#BB3826] block w-full p-3"
+                placeholder={t("confirm_password_placeholder")}
+              />
+            </div>
+          </>
+        );
+      case "idle":
+      default:
+        return (
+          <div className="mb-6">
+            <button
+              onClick={handleSendOtp}
+              disabled={otpLoading}
+              className="w-full text-white bg-primary hover:bg-primary/90 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-lg px-5 py-3 text-center"
+            >
+              {otpLoading ? "Sending OTP..." : t("change_password")}
+            </button>
+          </div>
+        );
+    }
+  };
+
   return (
-    <div className="w-full flex flex-col justify-center gap-5 px-3  lg:px-28 md:flex-row">
+    <div className="w-full flex flex-col justify-center gap-5 px-3 lg:px-28 md:flex-row">
       <ToastContainer />
-      {/* Main Content */}
       {loading ? (
         <SettingsSkeleton t={t} />
       ) : user ? (
         <main className="w-full min-h-screen py-1 flex justify-center">
           <div className="p-1 md:p-6 w-full">
-            <div className="w-full  pb-10 mt-8  sm:rounded-lg">
+            <div className="w-full pb-10 mt-8 sm:rounded-lg">
               <h2 className="pl-6 text-3xl font-bold sm:text-2xl text-[#1a202c]">
-                {t("edit_profile", { fallback: "Edit Your Profile" })}
+                {t("edit_profile")}
               </h2>
 
               <div className="grid mx-auto mt-8">
-                <div className="flex flex-col items-center justify-between  sm:flex-row sm:space-y-0 gap-10">
+                <div className="flex flex-col items-center justify-between sm:flex-row sm:space-y-0 gap-10">
                   <div>
-                    {/* Profile Picture */}
                     <label htmlFor="changePhoto">
                       <Image
                         className="object-cover w-48 h-48 p-1 rounded-full ring-2 ring-[#BB3826]"
-                        alt={
-                          user.name ||
-                          t("user_profile", { fallback: "User Profile" })
-                        }
+                        alt={user.name || t("user_profile")}
                         src={
                           previewImage
                             ? previewImage
@@ -203,7 +334,6 @@ const Page = () => {
                         height={192}
                       />
                     </label>
-
                     <div className="flex flex-col space-y-6 sm:ml-8">
                       <input
                         id="changePhoto"
@@ -217,11 +347,10 @@ const Page = () => {
                   {user.code ? <CardCode code={user.code} /> : null}
                 </div>
 
-                {/* User Information */}
                 <div className="items-center mt-10 sm:mt-16">
                   <div className="mb-6">
                     <label className="block mb-2 text-lg font-medium text-[#1a202c]">
-                      {t("name_label", { fallback: "Your Name" })}
+                      {t("name_label")}
                     </label>
                     <input
                       type="text"
@@ -230,15 +359,13 @@ const Page = () => {
                         setUser({ ...user, name: e.target.value })
                       }
                       className="bg-white border border-gray-300 text-[#262626] text-lg rounded-lg focus:ring-[#BB3826] focus:border-[#BB3826] block w-full p-3"
-                      placeholder={t("name_placeholder", {
-                        fallback: "Your name",
-                      })}
+                      placeholder={t("name_placeholder")}
                     />
                   </div>
 
                   <div className="mb-6">
                     <label className="block mb-2 text-lg font-medium text-[#1a202c]">
-                      {t("email_label", { fallback: "Your Email" })}
+                      {t("email_label")}
                     </label>
                     <input
                       type="email"
@@ -247,82 +374,32 @@ const Page = () => {
                         setUser({ ...user, email: e.target.value })
                       }
                       className="bg-white border border-gray-300 text-[#262626] text-lg rounded-lg focus:ring-[#BB3826] focus:border-[#BB3826] block w-full p-3"
-                      placeholder={t("email_placeholder", {
-                        fallback: "your.email@mail.com",
-                      })}
+                      placeholder={t("email_placeholder")}
                     />
                   </div>
 
                   <div className="mb-6">
                     <label className="block mb-2 text-lg font-medium text-[#1a202c]">
-                      {t("phone_label", { fallback: "Your Phone" })}
+                      {t("phone_label")}
                     </label>
                     <input
                       type="text"
+                      readOnly
                       value={user.phone || ""}
-                      onChange={(e) =>
-                        setUser({ ...user, phone: e.target.value })
-                      }
-                      className="bg-white border border-gray-300 text-[#262626] text-lg rounded-lg focus:ring-[#BB3826] focus:border-[#BB3826] block w-full p-3"
-                      placeholder={t("phone_placeholder", {
-                        fallback: "Your phone",
-                      })}
+                      className="bg-gray-100 border border-gray-300 text-gray-500 text-lg rounded-lg focus:ring-[#BB3826] focus:border-[#BB3826] block w-full p-3"
+                      placeholder={t("phone_placeholder")}
                     />
                   </div>
 
-                  <div className="mb-8">
-                    <label className="block mb-2 text-lg font-medium text-[#1a202c]">
-                      {t("city_label", { fallback: "City" })}
-                    </label>
-                    <input
-                      type="text"
-                      value={user.city || "Alexandria, Egypt"}
-                      onChange={(e) =>
-                        setUser({ ...user, city: e.target.value })
-                      }
-                      className="bg-white border border-gray-300 text-[#262626] text-lg rounded-lg focus:ring-[#BB3826] focus:border-[#BB3826] block w-full p-3"
-                      placeholder={t("city_placeholder", {
-                        fallback: "Your city",
-                      })}
-                    />
-                  </div>
+                  {renderPasswordSection()}
 
-                  <div className="mb-6">
-                    <label className="block mb-2 text-lg font-medium text-[#1a202c]">
-                      {t("change_password", { fallback: "Change Password" })}
-                    </label>
-                    <input
-                      type="password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      className="bg-white border border-gray-300 text-[#262626] text-lg rounded-lg focus:ring-[#BB3826] focus:border-[#BB3826] block w-full p-3"
-                      placeholder={t("new_password_placeholder", {
-                        fallback: "Enter Your New Password",
-                      })}
-                    />
-                  </div>
-
-                  <div className="mb-6">
-                    <label className="block mb-2 text-lg font-medium text-[#1a202c]">
-                      {t("confirm_password", { fallback: "Confirm Password" })}
-                    </label>
-                    <input
-                      type="password"
-                      value={passwordConfirmation}
-                      onChange={(e) => setPasswordConfirmation(e.target.value)}
-                      className="bg-white border border-gray-300 text-[#262626] text-lg rounded-lg focus:ring-[#BB3826] focus:border-[#BB3826] block w-full p-3"
-                      placeholder={t("confirm_password_placeholder", {
-                        fallback: "Confirm Your New Password",
-                      })}
-                    />
-                  </div>
-                  {/* Save Button */}
                   <div className="flex justify-end">
                     <button
+                      type="button"
                       onClick={handleSave}
-                      className="text-white bg-[#BB3826] hover:bg-[#962E1E] focus:ring-4 focus:outline-none focus:ring-[#BB3826] font-medium rounded-lg text-lg px-6 py-3"
+                      className="text-white bg-[#BB3826] hover:bg-[#9f3122] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-3 text-center"
                     >
-                      {t("save_button", { fallback: "Save" })}
+                      {t("save_button")}
                     </button>
                   </div>
                 </div>
@@ -331,9 +408,7 @@ const Page = () => {
           </div>
         </main>
       ) : (
-        <p className="text-center text-lg text-gray-500 h-[90vh]">
-          {t("no_user_found", { fallback: "No user found" })}
-        </p>
+        <p className="text-center text-lg mt-10">{t("loading_user_data")}</p>
       )}
     </div>
   );
